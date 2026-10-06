@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">
+        🗺️ Complaint Map
+    </h1>
+
+    <div id="map"
+         style="height:700px;border-radius:15px;">
+    </div>
+
+</div>
+
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([13.0827,80.2707],8);
+
+L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution:'OpenStreetMap'
+    }
+).addTo(map);
+
+{% for complaint in complaints %}
+
+    {% if complaint.latitude and complaint.longitude %}
+
+        var issue = "{{ complaint.issue }}";
+
+        var color = "blue";
+
+        if(issue=="pothole"){
+            color = "red";
+        }
+        else if(issue=="garbage"){
+            color = "green";
+        }
+        else{
+            color = "blue";
+        }
+
+        L.circleMarker(
+            [
+                {{ complaint.latitude }},
+                {{ complaint.longitude }}
+            ],
+            {
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.8,
+                radius: 10
+            }
+        )
+        .addTo(map)
+        .bindPopup("Complaint {{ complaint.id }}");
+"<div style='width:260px'>" +
+"<h5>{{ complaint.issue }}</h5>" +
+
+"<b>ID:</b> {{ complaint.id }}<br>" +
+
+"<b>Status:</b> {{ complaint.status }}<br>" +
+
+"<b>Priority:</b> {{ complaint.priority }}<br>" +
+
+"<b>Department:</b> {{ complaint.department }}<br>" +
+
+"<b>Authority:</b> {{ complaint.authority }}<br>" +
+
+"<b>Location:</b> {{ complaint.location }}" +
+
+"</div>"
+
+
+    {% endif %}
+
+{% endfor %}
+
+</script>
+
+{% endblock %}

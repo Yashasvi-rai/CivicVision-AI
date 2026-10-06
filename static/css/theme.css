@@ -1,0 +1,625 @@
+/* =========================================================
+   URBAN VISION AI
+   PROFESSIONAL UI ADD-ON
+   Dark / Light Mode + Animations
+========================================================= */
+
+:root {
+    --uv-bg: #eef4fb;
+    --uv-card: #ffffff;
+    --uv-text: #172033;
+    --uv-muted: #64748b;
+    --uv-primary: #0d6efd;
+    --uv-primary-dark: #0756c7;
+    --uv-border: rgba(15, 23, 42, 0.10);
+    --uv-shadow: 0 12px 35px rgba(15, 23, 42, 0.10);
+    --uv-shadow-hover: 0 20px 45px rgba(13, 110, 253, 0.18);
+    --uv-nav: #111c29;
+    --uv-input: #ffffff;
+}
+
+html[data-theme="dark"] {
+    --uv-bg: #0b1220;
+    --uv-card: #111b2b;
+    --uv-text: #edf4ff;
+    --uv-muted: #9aaac0;
+    --uv-primary: #3d8bfd;
+    --uv-primary-dark: #1769d4;
+    --uv-border: rgba(255,255,255,0.09);
+    --uv-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    --uv-shadow-hover: 0 20px 50px rgba(61,139,253,0.18);
+    --uv-nav: #07101c;
+    --uv-input: #162235;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+body {
+    background: var(--uv-bg) !important;
+    color: var(--uv-text);
+    transition:
+        background-color .35s ease,
+        color .35s ease;
+}
+
+body,
+.card,
+.dashboard-card,
+.status-card,
+.hero,
+.table,
+.form-control,
+.form-select,
+.navbar,
+footer,
+.info-box {
+    transition:
+        background-color .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+.card,
+.dashboard-card,
+.status-card {
+    background: var(--uv-card);
+    color: var(--uv-text);
+    border-color: var(--uv-border);
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    background: var(--uv-nav) !important;
+    box-shadow: 0 5px 25px rgba(0,0,0,.16);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.nav-link {
+    position: relative;
+    transition: color .25s ease, transform .25s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 3px;
+    height: 2px;
+    background: var(--uv-primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .25s ease;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* =========================================================
+   THEME BUTTON
+========================================================= */
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.08);
+    background: var(--uv-primary);
+    box-shadow: 0 0 20px rgba(13,110,253,.4);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(
+        120deg,
+        #0868ff,
+        #0aa6df,
+        #09b8c8
+    );
+    color: white;
+    box-shadow: var(--uv-shadow);
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero::before {
+    width: 260px;
+    height: 260px;
+    right: -90px;
+    top: -120px;
+    background: rgba(255,255,255,.12);
+    animation: heroFloat 7s ease-in-out infinite;
+}
+
+.hero::after {
+    width: 180px;
+    height: 180px;
+    left: 40%;
+    bottom: -110px;
+    background: rgba(255,255,255,.08);
+    animation: heroFloat 9s ease-in-out infinite reverse;
+}
+
+@keyframes heroFloat {
+    0%,100% {
+        transform: translate(0,0);
+    }
+    50% {
+        transform: translate(-20px,25px);
+    }
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.dashboard-card,
+.status-card,
+.card {
+    border: 1px solid var(--uv-border);
+    box-shadow: var(--uv-shadow);
+}
+
+.dashboard-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(13,110,253,.06);
+    right: -25px;
+    top: -25px;
+    transition: transform .4s ease;
+}
+
+.dashboard-card:hover::before {
+    transform: scale(2.2);
+}
+
+.dashboard-card:hover,
+.status-card:hover,
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--uv-shadow-hover);
+}
+
+.dashboard-card,
+.status-card,
+.card {
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.dashboard-icon {
+    transition: transform .35s ease;
+}
+
+.dashboard-card:hover .dashboard-icon {
+    transform: translateY(-5px) rotate(5deg) scale(1.08);
+}
+
+/* =========================================================
+   FORM INPUTS
+========================================================= */
+
+.form-control,
+.form-select {
+    background-color: var(--uv-input);
+    color: var(--uv-text);
+    border-color: var(--uv-border);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--uv-input);
+    color: var(--uv-text);
+    border-color: var(--uv-primary);
+    box-shadow:
+        0 0 0 .2rem rgba(13,110,253,.13),
+        0 5px 18px rgba(13,110,253,.08);
+    transform: translateY(-1px);
+}
+
+.form-control::placeholder {
+    color: var(--uv-muted);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.14);
+}
+
+.btn:active {
+    transform: scale(.97);
+}
+
+/* =========================================================
+   UPLOAD AREA
+========================================================= */
+
+.drop-zone {
+    border: 2px dashed rgba(13,110,253,.35);
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    background: rgba(13,110,253,.025);
+    transition: all .3s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: var(--uv-primary);
+    background: rgba(13,110,253,.08);
+    transform: scale(1.01);
+    box-shadow: inset 0 0 25px rgba(13,110,253,.05);
+}
+
+/* =========================================================
+   AI RESULT
+========================================================= */
+
+.result-card {
+    animation: resultAppear .55s ease;
+}
+
+.info-box {
+    background: rgba(13,110,253,.035);
+    border: 1px solid var(--uv-border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.info-box:hover {
+    border-color: rgba(13,110,253,.35);
+    transform: translateX(3px);
+}
+
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+#preview {
+    animation: imageReveal .5s ease;
+}
+
+@keyframes imageReveal {
+    from {
+        opacity: 0;
+        transform: scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table {
+    color: var(--uv-text);
+    border-color: var(--uv-border);
+}
+
+.table tbody tr {
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(13,110,253,.05);
+}
+
+/* =========================================================
+   MAP
+========================================================= */
+
+#map {
+    overflow: hidden;
+    box-shadow: var(--uv-shadow);
+    border: 1px solid var(--uv-border);
+    animation: mapAppear .7s ease;
+}
+
+@keyframes mapAppear {
+    from {
+        opacity: 0;
+        transform: scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   LOGIN / REGISTER
+========================================================= */
+
+.auth-page {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-page::before,
+.auth-page::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.auth-page::before {
+    width: 350px;
+    height: 350px;
+    background: rgba(13,110,253,.12);
+    top: -120px;
+    left: -100px;
+    animation: authFloat 8s ease-in-out infinite;
+}
+
+.auth-page::after {
+    width: 300px;
+    height: 300px;
+    background: rgba(124,58,237,.10);
+    bottom: -100px;
+    right: -80px;
+    animation: authFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes authFloat {
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(30px,-25px);
+    }
+}
+
+.auth-container {
+    width: min(1000px, 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--uv-card);
+    border: 1px solid var(--uv-border);
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0,0,0,.18);
+    position: relative;
+    z-index: 1;
+    animation: authEnter .65s ease;
+}
+
+@keyframes authEnter {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.auth-brand {
+    padding: 50px;
+    color: white;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.18), transparent 30%),
+        linear-gradient(145deg,#075ff0,#08abc7);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-brand h1 {
+    font-weight: 800;
+    font-size: 2.2rem;
+}
+
+.auth-brand-icon {
+    font-size: 110px;
+    opacity: .95;
+    animation: authIcon 4s ease-in-out infinite;
+}
+
+@keyframes authIcon {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.auth-form {
+    padding: 50px;
+}
+
+.auth-form h2 {
+    font-weight: 800;
+    color: var(--uv-text);
+}
+
+.auth-input {
+    position: relative;
+}
+
+.auth-input i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--uv-muted);
+    z-index: 2;
+}
+
+.auth-input .form-control {
+    padding-left: 45px;
+    height: 50px;
+    border-radius: 12px;
+}
+
+.auth-button {
+    height: 50px;
+    border-radius: 12px;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+    transition: left .6s ease;
+}
+
+.auth-button:hover::before {
+    left: 130%;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    color: var(--uv-muted);
+}
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand {
+        padding: 35px;
+        text-align: center;
+    }
+
+    .auth-brand-icon {
+        font-size: 70px;
+    }
+
+    .auth-form {
+        padding: 35px 25px;
+    }
+
+    .hero {
+        border-radius: 18px;
+    }
+
+}

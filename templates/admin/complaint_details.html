@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Complaint Details - Civic Vision AI
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="track-card fade-up">
+
+        <div class="text-center mb-4">
+
+            <div class="feature-icon icon-blue mx-auto">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+            </div>
+
+            <h1>
+                Complaint Details
+            </h1>
+
+            <p class="text-secondary">
+                Complete information about this urban issue.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- IMAGE -->
+
+            <div class="col-lg-5">
+
+                <div class="info-card">
+
+                    <h5>
+                        <i class="bi bi-image"></i>
+                        Reported Image
+                    </h5>
+
+                    <img
+                        src="{{ url_for('uploaded_file', filename=complaint.image_path.replace('\\', '/').split('/')[-1]) }}"
+                        class="img-fluid rounded-4 shadow-sm mt-3"
+                        alt="Complaint Image">
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="col-lg-7">
+
+                <div class="info-card">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <h2>
+                            {{ complaint.issue }}
+                        </h2>
+
+                        {% if complaint.status == "Pending" %}
+
+                        <span class="status-badge status-pending">
+                            Pending
+                        </span>
+
+                        {% elif complaint.status == "In Progress" %}
+
+                        <span class="status-badge status-progress">
+                            In Progress
+                        </span>
+
+                        {% elif complaint.status == "Resolved" %}
+
+                        <span class="status-badge status-resolved">
+                            Resolved
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    <hr>
+
+                    <p>
+                        <b>Reference ID:</b>
+                        {{ complaint.reference_id }}
+                    </p>
+
+                    <p>
+                        <b>Status:</b>
+                        {{ complaint.status }}
+                    </p>
+
+                    <p>
+                        <b>Priority:</b>
+                        {{ complaint.priority }}
+                    </p>
+
+                    <p>
+                        <b>Department:</b>
+                        {{ complaint.department }}
+                    </p>
+
+                    <p>
+                        <b>Authority:</b>
+                        {{ complaint.authority }}
+                    </p>
+
+                    <p>
+                        <b>Location:</b>
+                        📍 {{ complaint.location }}
+                    </p>
+<p>
+                        <b>Created:</b>
+                        {{ complaint.created_at }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

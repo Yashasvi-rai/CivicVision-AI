@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="mb-4">
+            Complaint Details
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-5">
+
+                <img
+                    src="/{{ complaint.image_path }}"
+                    class="img-fluid rounded shadow"
+                >
+
+            </div>
+
+            <div class="col-md-7">
+
+                <h3>{{ complaint.issue }}</h3>
+
+                <hr>
+
+                <p><b>ID:</b> {{ complaint.id }}</p>
+
+                <p><b>Status:</b> {{ complaint.status }}</p>
+
+                <p><b>Priority:</b> {{ complaint.priority }}</p>
+
+                <p><b>Department:</b> {{ complaint.department }}</p>
+
+                <p><b>Authority:</b> {{ complaint.authority }}</p>
+
+                <p><b>Location:</b> {{ complaint.location }}</p>
+
+                <p><b>Latitude:</b> {{ complaint.latitude }}</p>
+
+                <p><b>Longitude:</b> {{ complaint.longitude }}</p>
+
+                <p><b>Created:</b> {{ complaint.created_at }}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

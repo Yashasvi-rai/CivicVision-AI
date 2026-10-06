@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analytics - Civic Vision AI
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1>
+            📊 Analytics Dashboard
+        </h1>
+
+        <p class="text-secondary">
+            Monitor urban complaints and resolution status.
+        </p>
+
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="feature-card text-center">
+
+                <div class="feature-icon icon-blue mx-auto">
+                    <i class="bi bi-clipboard-data"></i>
+                </div>
+
+                <h2>{{ total_complaints }}</h2>
+
+                <p class="text-secondary">
+                    Total Complaints
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="feature-card text-center">
+
+                <div class="feature-icon icon-orange mx-auto">
+                    <i class="bi bi-clock"></i>
+                </div>
+
+                <h2>{{ pending }}</h2>
+
+                <p class="text-secondary">
+                    Pending
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="feature-card text-center">
+
+                <div class="feature-icon icon-purple mx-auto">
+                    <i class="bi bi-tools"></i>
+                </div>
+
+                <h2>{{ in_progress }}</h2>
+
+                <p class="text-secondary">
+                    In Progress
+                </p>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="feature-card text-center">
+
+                <div class="feature-icon icon-green mx-auto">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <h2>{{ resolved }}</h2>
+
+                <p class="text-secondary">
+                    Resolved
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- CHARTS -->
+
+    <div class="row g-4">
+
+        <div class="col-lg-6">
+
+            <div class="info-card">
+
+                <h4 class="mb-4">
+                    Complaint Distribution
+                </h4>
+
+                <div style="height: 320px;">
+                    <canvas id="complaintChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <div class="info-card">
+
+                <h4 class="mb-4">
+                    Complaint Status
+                </h4>
+
+                <div style="height: 320px;">
+                    <canvas id="statusChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Complaint Distribution
+    const complaintCanvas = document.getElementById("complaintChart");
+
+    if (complaintCanvas) {
+
+        new Chart(complaintCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+                    "Pothole",
+                    "Garbage",
+                    "Drainage"
+                ],
+
+                datasets: [{
+
+                    label: "Number of Complaints",
+
+                    data: [
+                        {{ pothole | default(0) | int }},
+                        {{ garbage | default(0) | int }},
+                        {{ drainage | default(0) | int }}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+    // Complaint Status
+    const statusCanvas = document.getElementById("statusChart");
+
+    if (statusCanvas) {
+
+        new Chart(statusCanvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: [
+                    "Pending",
+                    "In Progress",
+                    "Resolved"
+                ],
+
+                datasets: [{
+
+                    data: [
+                        {{ pending | default(0) | int }},
+                        {{ in_progress | default(0) | int }},
+                        {{ resolved | default(0) | int }}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        position: "bottom"
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

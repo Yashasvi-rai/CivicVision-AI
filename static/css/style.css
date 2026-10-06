@@ -1,0 +1,342 @@
+/* ===================================
+   GOOGLE FONT
+=================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ===================================
+   BODY
+=================================== */
+
+body{
+
+    background:#eef3f8;
+
+    color:#222;
+
+}
+
+/* ===================================
+   NAVBAR
+=================================== */
+
+.navbar{
+
+    background:#17212b !important;
+
+    padding:15px 30px;
+
+}
+
+.navbar-brand{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.nav-link{
+
+    color:white !important;
+
+    margin-left:12px;
+
+    transition:.3s;
+
+}
+
+.nav-link:hover{
+
+    color:#00d4ff !important;
+
+}
+
+.badge{
+
+    font-size:14px;
+
+}
+
+/* ===================================
+   HERO SECTION
+=================================== */
+
+.hero{
+
+    background:linear-gradient(
+    135deg,
+    #0d6efd,
+    #00bcd4
+    );
+
+    color:white;
+
+    padding:45px;
+
+    border-radius:20px;
+
+    margin-bottom:35px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+.hero h1{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+.hero p{
+
+    margin-top:15px;
+
+    font-size:18px;
+
+}
+
+/* ===================================
+   CARD
+=================================== */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+    background:white;
+
+    border:none;
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+/* ===================================
+   BUTTON
+=================================== */
+
+.btn{
+
+    border-radius:12px;
+
+}
+
+.btn-primary{
+
+    background:#0d6efd;
+
+}
+
+.btn-primary:hover{
+
+    background:#0056d6;
+
+}
+
+/* ===================================
+   FILE INPUT
+=================================== */
+
+input[type=file]{
+
+    border-radius:12px;
+
+    padding:10px;
+
+}
+
+/* ===================================
+   IMAGE PREVIEW
+=================================== */
+
+#preview{
+
+    width:100%;
+
+    border-radius:15px;
+
+    display:none;
+
+    margin-top:20px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+/* ===================================
+   RESULT CARD
+=================================== */
+
+.result-card{
+
+    display:none;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-top:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+}
+
+/* ===================================
+   RESULT TITLE
+=================================== */
+
+.result-title{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+/* ===================================
+   INFO BOX
+=================================== */
+
+.info-box{
+
+    background:#f8f9fa;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+}
+
+.info-box i{
+
+    color:#0d6efd;
+
+    margin-right:10px;
+
+}
+
+/* ===================================
+   BADGES
+=================================== */
+
+.issue-badge{
+
+    background:#0d6efd;
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+.department-badge{
+
+    background:#20c997;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+.authority-badge{
+
+    background:#fd7e14;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+}
+
+/* ===================================
+   PROGRESS BAR
+=================================== */
+
+.progress{
+
+    height:25px;
+
+    border-radius:15px;
+
+}
+
+.progress-bar{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ===================================
+   LOADING
+=================================== */
+
+#loading{
+
+    display:none;
+
+    text-align:center;
+
+    margin-top:25px;
+
+}
+
+.spinner-border{
+
+    width:4rem;
+
+    height:4rem;
+
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:#888;
+
+    padding:25px;
+
+}

@@ -1,0 +1,301 @@
+/* ===================================
+   DASHBOARD CARDS
+=================================== */
+
+.dashboard-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(13,110,253,.20);
+
+}
+
+/* ===================================
+   ICON
+=================================== */
+
+.dashboard-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+}
+
+/* ===================================
+   COLORS
+=================================== */
+
+.blue{
+
+    background:#0d6efd;
+
+}
+
+.green{
+
+    background:#20c997;
+
+}
+
+.orange{
+
+    background:#fd7e14;
+
+}
+
+.red{
+
+    background:#dc3545;
+
+}
+
+.purple{
+
+    background:#6f42c1;
+
+}
+
+/* ===================================
+   NUMBER
+=================================== */
+
+.dashboard-number{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    color:#17212b;
+
+}
+
+/* ===================================
+   TITLE
+=================================== */
+
+.dashboard-title{
+
+    font-size:16px;
+
+    color:#666;
+
+    font-weight:500;
+
+}
+
+/* ===================================
+   STATUS CARD
+=================================== */
+
+.status-card{
+
+    background:white;
+
+    border-left:6px solid #0d6efd;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.status-card:hover{
+
+    border-left:6px solid #20c997;
+
+}
+
+/* ===================================
+   TABLE
+=================================== */
+
+.table{
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.table thead{
+
+    background:#17212b;
+
+    color:white;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+.table tbody tr:hover{
+
+    background:#eef5ff;
+
+}
+
+/* ===================================
+   BADGES
+=================================== */
+
+.badge-high{
+
+    background:#dc3545;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+}
+
+.badge-medium{
+
+    background:#ffc107;
+
+    color:black;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+}
+
+.badge-low{
+
+    background:#20c997;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+}
+
+/* ===================================
+   PROFILE
+=================================== */
+
+.profile-card{
+
+    background:linear-gradient(135deg,#0d6efd,#00bcd4);
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.profile-card img{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    border:4px solid white;
+
+}
+
+/* ===================================
+   QUICK ACTION BUTTONS
+=================================== */
+
+.action-btn{
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    margin:5px;
+
+    font-weight:600;
+
+}
+
+/* ===================================
+   CHART BOX
+=================================== */
+
+.chart-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media(max-width:768px){
+
+.dashboard-card{
+
+    margin-bottom:20px;
+
+}
+
+.dashboard-number{
+
+    font-size:28px;
+
+}
+
+}

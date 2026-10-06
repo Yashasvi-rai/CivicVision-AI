@@ -1,0 +1,1729 @@
+{% extends "base.html" %}
+
+{% block title %}
+Civic Vision AI
+{% endblock %}
+
+{% block content %}
+
+<!-- ===========================
+ HERO SECTION
+=========================== -->
+
+<div class="hero fade-in">
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-8">
+
+            <h1>
+                <i class="fa-solid fa-city"></i>
+                Civic Vision AI
+            </h1>
+
+            <p class="mt-3">
+                AI Powered Smart Urban Issue Detection System
+            </p>
+
+            <p>
+                Upload an image and let Artificial Intelligence
+                automatically detect urban problems such as potholes,
+                garbage accumulation and drainage issues.
+            </p>
+
+        </div>
+
+        <div class="col-lg-4 text-center">
+
+            <i class="fa-solid fa-microchip floating"
+               style="font-size:130px;color:white;">
+            </i>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===========================
+ DASHBOARD CARDS
+=========================== -->
+
+<div class="row mb-4">
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card fade-in">
+
+            <div class="dashboard-icon blue">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+            </div>
+
+            <div class="dashboard-number">
+                AI
+            </div>
+
+            <div class="dashboard-title">
+                Smart Detection
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card fade-in">
+
+            <div class="dashboard-icon green">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+            <div class="dashboard-number">
+                GPS
+            </div>
+
+            <div class="dashboard-title">
+                Location Detection
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card fade-in">
+
+            <div class="dashboard-icon orange">
+
+                <i class="fa-solid fa-building"></i>
+
+            </div>
+
+            <div class="dashboard-number">
+                Auto
+            </div>
+
+            <div class="dashboard-title">
+                Department Assignment
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card fade-in">
+
+            <div class="dashboard-icon purple">
+
+                <i class="fa-solid fa-brain"></i>
+
+            </div>
+
+            <div class="dashboard-number">
+                CNN
+            </div>
+
+            <div class="dashboard-title">
+                Deep Learning Model
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===========================
+ MAIN CONTENT
+=========================== -->
+
+<div class="row">
+
+
+<!-- ===========================
+ LEFT SIDE
+=========================== -->
+
+<div class="col-lg-5">
+
+    <div class="card shadow-lg slide-left">
+
+        <div class="card-header">
+
+            <i class="fa-solid fa-upload"></i>
+
+            Upload Urban Issue
+
+        </div>
+
+
+        <div class="card-body">
+
+            <form
+                id="uploadForm"
+                action="/predict"
+                method="POST"
+                enctype="multipart/form-data">
+
+
+                <!-- ===========================
+                IMAGE UPLOAD
+                =========================== -->
+
+                <div class="drop-zone">
+
+                    <i class="fa-solid fa-cloud-arrow-up"
+                       style="font-size:70px;color:#0d6efd;">
+                    </i>
+
+                    <h4 class="mt-3">
+                        Drag & Drop Image
+                    </h4>
+
+                    <p>
+                        or choose from your computer
+                    </p>
+
+                    <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        class="form-control"
+                        accept="image/*"
+                        required>
+
+                </div>
+
+
+                <br>
+
+
+                <!-- ===========================
+                LOCATION SELECTION
+                =========================== -->
+
+                <div class="mb-3">
+
+                    <label
+                        for="location_mode"
+                        class="form-label fw-bold">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Complaint Location
+
+                    </label>
+
+
+                    <select
+                        id="location_mode"
+                        name="location_mode"
+                        class="form-select">
+
+                        <option value="auto">
+                            Use GPS Location from Image
+                        </option>
+
+                        <option value="manual">
+                            Enter Location Manually
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ===========================
+                MANUAL LOCATION
+                =========================== -->
+
+                <div
+                    id="manual_location_box"
+                    class="mb-3"
+                    style="display:none;">
+
+                    <label
+                        for="manual_address"
+                        class="form-label fw-bold">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Enter Location
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="manual_address"
+                        name="manual_address"
+                        class="form-control"
+                        placeholder="Example: Tenkila, Puttur, Karnataka">
+
+
+                    <small class="text-secondary">
+
+                        Enter an area, locality, address,
+                        city or PIN code.
+
+                        The location will be converted
+                        into coordinates automatically.
+
+                    </small>
+
+                </div>
+
+
+                <!-- ===========================
+                HIDDEN COORDINATES
+                =========================== -->
+
+                <input
+                    type="hidden"
+                    id="lat"
+                    name="lat">
+
+
+                <input
+                    type="hidden"
+                    id="lng"
+                    name="lng">
+
+
+                <!-- ===========================
+                IMAGE PREVIEW
+                =========================== -->
+
+                <div class="text-center">
+
+                    <img
+                        id="preview"
+                        class="img-fluid rounded shadow"
+                        style="display:none; max-height:300px;"
+                        alt="Image Preview">
+
+                </div>
+
+
+                <br>
+
+
+                <!-- ===========================
+                SUBMIT BUTTON
+                =========================== -->
+
+                <div class="d-grid">
+
+                    <button
+                        type="submit"
+                        id="predictButton"
+                        class="btn btn-primary btn-lg">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Upload & Predict
+
+                    </button>
+
+                </div>
+
+
+                <!-- ===========================
+                LOADING
+                =========================== -->
+
+                <div
+                    id="loading"
+                    class="text-center"
+                    style="display:none;">
+
+                    <div
+                        class="spinner-border text-primary mt-4"
+                        role="status">
+
+                    </div>
+
+
+                    <h5 class="mt-3">
+
+                        AI is analysing image...
+
+                    </h5>
+
+
+                    <p class="text-secondary">
+
+                        Detecting issue and processing location.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ===========================
+                ERROR MESSAGE
+                =========================== -->
+
+                <div
+                    id="errorMessage"
+                    class="alert alert-danger mt-4"
+                    style="display:none;">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <span id="errorText"></span>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===========================
+ RIGHT SIDE
+=========================== -->
+
+<div class="col-lg-7">
+
+    <div class="card shadow-lg slide-right">
+
+
+        <!-- ===========================
+        RESULT HEADER
+        =========================== -->
+
+        <div
+            class="card-header d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <i class="fa-solid fa-robot"></i>
+
+                AI Prediction Result
+
+            </div>
+
+
+            <span class="badge bg-success">
+
+                LIVE
+
+            </span>
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <div
+                id="resultCard"
+                class="result-card">
+
+
+                <!-- ===========================
+                COMPLAINT REFERENCE
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-hashtag"></i>
+
+                        Complaint Reference
+
+                    </h5>
+
+
+                    <span
+                        id="reference_id"
+                        class="department-badge">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- ===========================
+                ISSUE
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        Detected Issue
+
+                    </h5>
+
+
+                    <span
+                        id="issue"
+                        class="issue-badge">
+
+                        Waiting...
+
+                    </span>
+
+                </div>
+
+
+                <!-- ===========================
+                CONFIDENCE
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        Confidence
+
+                    </h5>
+
+
+                    <div class="progress mt-3">
+
+                        <div
+                            id="confidenceBar"
+                            class="progress-bar progress-bar-striped progress-bar-animated"
+                            style="width:0%;">
+
+                            0%
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="confidence"
+                        class="mt-2 fw-bold">
+
+                        0%
+
+                    </div>
+
+                </div>
+
+
+                <!-- ===========================
+                DEPARTMENT
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-building"></i>
+
+                        Assigned Department
+
+                    </h5>
+
+
+                    <span
+                        id="department"
+                        class="department-badge">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- ===========================
+                AUTHORITY
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        Authority
+
+                    </h5>
+
+
+                    <span
+                        id="authority"
+                        class="authority-badge">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- ===========================
+                LOCATION
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Detected Location
+
+                    </h5>
+
+
+                    <p
+                        id="location"
+                        class="mb-0">
+
+                        Waiting...
+
+                    </p>
+
+                </div>
+
+
+                <!-- ===========================
+                COORDINATES
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                        Coordinates
+
+                    </h5>
+
+
+                    <p class="mb-1">
+
+                        <strong>Latitude:</strong>
+
+                        <span id="resultLatitude">
+                            -
+                        </span>
+
+                    </p>
+
+
+                    <p class="mb-0">
+
+                        <strong>Longitude:</strong>
+
+                        <span id="resultLongitude">
+                            -
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+                <!-- ===========================
+                DESCRIPTION
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                        AI Description
+
+                    </h5>
+
+
+                    <p
+                        id="description"
+                        class="mb-0">
+
+                        Waiting for prediction...
+
+                    </p>
+
+                </div>
+
+
+                <!-- ===========================
+                EMAIL STATUS
+                =========================== -->
+
+                <div class="info-box">
+
+                    <h5>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        Complaint Notification
+
+                    </h5>
+
+
+                    <span
+                        id="emailStatus"
+                        class="department-badge">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- ===========================
+                PREDICTION STATUS
+                =========================== -->
+
+                <div class="alert alert-primary mt-4">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    Your uploaded image will be analysed
+                    using a CNN Deep Learning model.
+
+                    The detected issue, confidence,
+                    department, authority and location
+                    will appear here automatically.
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================
+HOW IT WORKS
+====================================== -->
+
+<div class="row mt-5">
+
+    <div class="col-12">
+
+        <h2 class="text-center mb-5">
+
+            <i class="fa-solid fa-gears"></i>
+
+            How Urban Vision AI Works
+
+        </h2>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card text-center">
+
+            <div class="dashboard-icon blue mx-auto">
+
+                <i class="fa-solid fa-image"></i>
+
+            </div>
+
+            <h5>
+                Upload Image
+            </h5>
+
+            <p>
+
+                Upload a GPS tagged image or
+                a normal image and provide the
+                location manually.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card text-center">
+
+            <div class="dashboard-icon purple mx-auto">
+
+                <i class="fa-solid fa-brain"></i>
+
+            </div>
+
+            <h5>
+                AI Detection
+            </h5>
+
+            <p>
+
+                CNN Deep Learning model
+                automatically detects the urban issue.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card text-center">
+
+            <div class="dashboard-icon green mx-auto">
+
+                <i class="fa-solid fa-building"></i>
+
+            </div>
+
+            <h5>
+                Department Assignment
+            </h5>
+
+            <p>
+
+                Appropriate authority is
+                assigned automatically.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="dashboard-card text-center">
+
+            <div class="dashboard-icon orange mx-auto">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <h5>
+                Complaint Registered
+            </h5>
+
+            <p>
+
+                Complaint is stored with
+                complete location and prediction.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+FEATURES
+====================================== -->
+
+<div class="row mt-5">
+
+    <div class="col-12">
+
+        <h2 class="text-center mb-5">
+
+            AI Powered Features
+
+        </h2>
+
+    </div>
+
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="status-card">
+
+            <h4>
+
+                <i class="fa-solid fa-road text-primary"></i>
+
+                Road Damage Detection
+
+            </h4>
+
+            <p>
+
+                Detect potholes with high confidence
+                using CNN.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="status-card">
+
+            <h4>
+
+                <i class="fa-solid fa-trash text-success"></i>
+
+                Garbage Detection
+
+            </h4>
+
+            <p>
+
+                Automatically identifies garbage
+                accumulation.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="status-card">
+
+            <h4>
+
+                <i class="fa-solid fa-water text-info"></i>
+
+                Drainage Detection
+
+            </h4>
+
+            <p>
+
+                Detects drainage blockage and overflow.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+AI INFORMATION
+====================================== -->
+
+<div class="card shadow-lg mt-5">
+
+    <div class="card-header">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        About Urban Vision AI
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <h4>
+
+                    Smart City AI Platform
+
+                </h4>
+
+
+                <p>
+
+                    Urban Vision AI is an intelligent
+                    complaint management system designed
+                    to identify urban infrastructure problems
+                    using Deep Learning and Computer Vision.
+
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        TensorFlow CNN Model
+                    </li>
+
+                    <li>
+                        Automatic GPS Detection
+                    </li>
+
+                    <li>
+                        Manual Location Entry
+                    </li>
+
+                    <li>
+                        AI Generated Description
+                    </li>
+
+                    <li>
+                        Automatic Department Assignment
+                    </li>
+
+                    <li>
+                        Complaint Tracking
+                    </li>
+
+                    <li>
+                        Analytics Dashboard
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="col-lg-6 text-center">
+
+                <i
+                    class="fa-solid fa-city floating"
+                    style="font-size:180px;color:#0d6efd;">
+
+                </i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+FOOTER
+====================================== -->
+
+<footer>
+
+    <hr>
+
+    <h5>
+        Urban Vision AI
+    </h5>
+
+
+    <p>
+        AI Powered Smart Urban Issue Detection System
+    </p>
+
+
+    <p>
+
+        Developed using
+
+        TensorFlow • Flask • Bootstrap • SQLite
+
+    </p>
+
+
+    <p>
+
+        © 2026 All Rights Reserved
+
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    // =================================================
+    // ELEMENTS
+    // =================================================
+
+    const uploadForm =
+        document.getElementById("uploadForm");
+
+    const fileInput =
+        document.getElementById("file");
+
+    const preview =
+        document.getElementById("preview");
+
+    const locationMode =
+        document.getElementById("location_mode");
+
+    const manualLocationBox =
+        document.getElementById("manual_location_box");
+
+    const manualAddress =
+        document.getElementById("manual_address");
+
+    const loading =
+        document.getElementById("loading");
+
+    const predictButton =
+        document.getElementById("predictButton");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const errorText =
+        document.getElementById("errorText");
+
+
+    // =================================================
+    // LOCATION MODE
+    // =================================================
+
+    locationMode.addEventListener(
+        "change",
+        function () {
+
+            if (this.value === "manual") {
+
+                manualLocationBox.style.display =
+                    "block";
+
+                manualAddress.required = true;
+
+                manualAddress.focus();
+
+            } else {
+
+                manualLocationBox.style.display =
+                    "none";
+
+                manualAddress.required = false;
+
+                manualAddress.value = "";
+
+            }
+
+        }
+    );
+
+
+    // =================================================
+    // IMAGE PREVIEW
+    // =================================================
+
+    fileInput.addEventListener(
+        "change",
+        function () {
+
+            const file = this.files[0];
+
+            if (!file) {
+
+                preview.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            if (!file.type.startsWith("image/")) {
+
+                showError(
+                    "Please select a valid image file."
+                );
+
+                fileInput.value = "";
+
+                preview.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    preview.src =
+                        event.target.result;
+
+                    preview.style.display =
+                        "block";
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    // =================================================
+    // FORM SUBMISSION
+    // =================================================
+
+    uploadForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            // -----------------------------------------
+            // RESET ERROR
+            // -----------------------------------------
+
+            hideError();
+
+
+            // -----------------------------------------
+            // CHECK FILE
+            // -----------------------------------------
+
+            const file =
+                fileInput.files[0];
+
+
+            if (!file) {
+
+                showError(
+                    "Please select an image first."
+                );
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // MANUAL LOCATION VALIDATION
+            // -----------------------------------------
+
+            if (
+                locationMode.value === "manual"
+                &&
+                !manualAddress.value.trim()
+            ) {
+
+                showError(
+                    "Please enter the complaint location."
+                );
+
+                manualAddress.focus();
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // SHOW LOADING
+            // -----------------------------------------
+
+            loading.style.display =
+                "block";
+
+
+            predictButton.disabled =
+                true;
+
+
+            predictButton.innerHTML = `
+
+                <span
+                    class="spinner-border spinner-border-sm me-2">
+                </span>
+
+                Processing...
+
+            `;
+
+
+            // -----------------------------------------
+            // RESET RESULT
+            // -----------------------------------------
+
+            document.getElementById(
+                "issue"
+            ).textContent = "Processing...";
+
+
+            document.getElementById(
+                "confidence"
+            ).textContent = "0%";
+
+
+            document.getElementById(
+                "confidenceBar"
+            ).style.width = "0%";
+
+
+            document.getElementById(
+                "department"
+            ).textContent = "-";
+
+
+            document.getElementById(
+                "authority"
+            ).textContent = "-";
+
+
+            document.getElementById(
+                "location"
+            ).textContent = "Processing location...";
+
+
+            document.getElementById(
+                "description"
+            ).textContent =
+                "Generating AI description...";
+
+
+            document.getElementById(
+                "reference_id"
+            ).textContent = "-";
+
+
+            document.getElementById(
+                "resultLatitude"
+            ).textContent = "-";
+
+
+            document.getElementById(
+                "resultLongitude"
+            ).textContent = "-";
+
+
+            document.getElementById(
+                "emailStatus"
+            ).textContent = "-";
+
+
+            // -----------------------------------------
+            // CREATE FORM DATA
+            // -----------------------------------------
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "file",
+                file
+            );
+
+
+            formData.append(
+                "location_mode",
+                locationMode.value
+            );
+
+
+            formData.append(
+                "manual_address",
+                manualAddress.value.trim()
+            );
+
+
+            // -----------------------------------------
+            // SEND TO FLASK
+            // -----------------------------------------
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/predict",
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                // -------------------------------------
+                // READ RESPONSE
+                // -------------------------------------
+
+                let data;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    throw new Error(
+                        "The server returned an invalid response."
+                    );
+
+                }
+
+
+                // -------------------------------------
+                // SERVER ERROR
+                // -------------------------------------
+
+                if (
+                    !response.ok
+                    ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message
+                        ||
+                        "Unable to process the complaint."
+                    );
+
+                }
+
+
+                // -------------------------------------
+                // DISPLAY PREDICTION
+                // -------------------------------------
+
+                document.getElementById(
+                    "issue"
+                ).textContent =
+                    formatIssue(data.prediction);
+
+
+                // -------------------------------------
+                // CONFIDENCE
+                // -------------------------------------
+
+                const confidence =
+                    Number(data.confidence || 0);
+
+
+                document.getElementById(
+                    "confidence"
+                ).textContent =
+                    confidence.toFixed(2) + "%";
+
+
+                document.getElementById(
+                    "confidenceBar"
+                ).style.width =
+                    confidence + "%";
+
+
+                document.getElementById(
+                    "confidenceBar"
+                ).textContent =
+                    confidence.toFixed(2) + "%";
+
+
+                // -------------------------------------
+                // DEPARTMENT
+                // -------------------------------------
+
+                document.getElementById(
+                    "department"
+                ).textContent =
+                    data.department || "-";
+
+
+                // -------------------------------------
+                // AUTHORITY
+                // -------------------------------------
+
+                document.getElementById(
+                    "authority"
+                ).textContent =
+                    data.authority || "-";
+
+
+                // -------------------------------------
+                // LOCATION
+                // -------------------------------------
+
+                document.getElementById(
+                    "location"
+                ).textContent =
+                    data.location ||
+                    "Unknown Location";
+
+
+                // -------------------------------------
+                // DESCRIPTION
+                // -------------------------------------
+
+                document.getElementById(
+                    "description"
+                ).textContent =
+                    data.description ||
+                    "No description available.";
+
+
+                // -------------------------------------
+                // REFERENCE ID
+                // -------------------------------------
+
+                document.getElementById(
+                    "reference_id"
+                ).textContent =
+                    data.reference_id || "-";
+
+
+                // -------------------------------------
+                // COORDINATES
+                // -------------------------------------
+
+                if (
+                    data.latitude !== undefined
+                    &&
+                    data.latitude !== null
+                ) {
+
+                    document.getElementById(
+                        "resultLatitude"
+                    ).textContent =
+                        Number(data.latitude)
+                        .toFixed(6);
+
+                }
+
+
+                if (
+                    data.longitude !== undefined
+                    &&
+                    data.longitude !== null
+                ) {
+
+                    document.getElementById(
+                        "resultLongitude"
+                    ).textContent =
+                        Number(data.longitude)
+                        .toFixed(6);
+
+                }
+
+
+                // -------------------------------------
+                // EMAIL STATUS
+                // -------------------------------------
+
+                document.getElementById(
+                    "emailStatus"
+                ).textContent =
+                    data.email_status || "-";
+
+
+                // -------------------------------------
+                // SUCCESS MESSAGE
+                // -------------------------------------
+
+                showSuccess(
+                    "Complaint registered successfully. Reference ID: "
+                    +
+                    (data.reference_id || "-")
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Prediction error:",
+                    error
+                );
+
+
+                // -------------------------------------
+                // ERROR
+                // -------------------------------------
+
+                showError(
+                    error.message
+                    ||
+                    "Something went wrong while processing the image."
+                );
+
+
+                // -------------------------------------
+                // IF GPS WAS NOT FOUND
+                // -------------------------------------
+
+                if (
+                    error.message
+                    &&
+                    error.message
+                    .toLowerCase()
+                    .includes("gps")
+                ) {
+
+                    locationMode.value =
+                        "manual";
+
+
+                    manualLocationBox.style.display =
+                        "block";
+
+
+                    manualAddress.required =
+                        true;
+
+
+                    manualAddress.focus();
+
+                }
+
+            } finally {
+
+                // -------------------------------------
+                // HIDE LOADING
+                // -------------------------------------
+
+                loading.style.display =
+                    "none";
+
+
+                predictButton.disabled =
+                    false;
+
+
+                predictButton.innerHTML = `
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Upload & Predict
+
+                `;
+
+            }
+
+        }
+    );
+
+
+    // =================================================
+    // FORMAT ISSUE NAME
+    // =================================================
+
+    function formatIssue(issue) {
+
+        if (!issue) {
+            return "-";
+        }
+
+
+        return issue
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, function (letter) {
+                return letter.toUpperCase();
+            });
+
+    }
+
+
+    // =================================================
+    // SHOW ERROR
+    // =================================================
+
+    function showError(message) {
+
+        errorText.textContent =
+            message;
+
+
+        errorMessage.className =
+            "alert alert-danger mt-4";
+
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+
+    // =================================================
+    // HIDE ERROR
+    // =================================================
+
+    function hideError() {
+
+        errorMessage.style.display =
+            "none";
+
+        errorText.textContent =
+            "";
+
+    }
+
+
+    // =================================================
+    // SHOW SUCCESS
+    // =================================================
+
+    function showSuccess(message) {
+
+        errorText.textContent =
+            message;
+
+
+        errorMessage.className =
+            "alert alert-success mt-4";
+
+
+        errorMessage.style.display =
+            "block";
+
+    }
+
+});
+
+</script>
+
+
+{% endblock %}
